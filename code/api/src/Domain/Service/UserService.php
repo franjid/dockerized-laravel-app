@@ -31,14 +31,14 @@ class UserService
     {
         $dbUsers = $this->userRepository->getUsers();
 
-        if ($dbUsers->getItems()) {
+        if ($dbUsers->count() >= 10) {
             return $dbUsers;
         }
 
         $apiUsers = $this->jsonPlaceHolderRepository->getUsers();
 
         foreach ($apiUsers as $user) {
-            $this->userModel::create([
+            $this->userModel::updateOrCreate([
                 'id' => $user['id'],
                 'name' => $user['name'],
                 'username' => $user['username'],

@@ -19,6 +19,11 @@ class UserCollection
         return $this->users;
     }
 
+    public function count(): int
+    {
+        return count($this->getItems());
+    }
+
     public function toArray(): array
     {
         $result = [];
