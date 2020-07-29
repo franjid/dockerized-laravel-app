@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+    nginx:
+        build:
+            context: .
+            dockerfile: ./docker/nginx/Dockerfile
+        ports:
+            - "80:80"
+        volumes:
+            - ./code:/code
+            - /code/api/vendor # ignore folder
+        networks:
+            - web-network
+        depends_on:
+            - php
+    php:
+        build:
+            context: .
+            dockerfile: ./docker/php/Dockerfile
+        environment:
+            - MYSQL_HOST
+            - MYSQL_USER
+            - MYSQL_PASSWORD
+        volumes:
+            - ./code:/code
+            - /code/api/vendor # ignore folder
+        networks:
+            - web-network
+            - app-network
+        depends_on:
+            - mysql
+
+    mysql:
+        image: mysql:8
+        ports:
+            - "33080:3306"
+        environment:
+            - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+        volumes:
+            - ./docker/mysql/migrations:/docker-entrypoint-initdb.d
+        networks:
+            - app-network
+
+networks:
+    web-network:
+    app-network:
