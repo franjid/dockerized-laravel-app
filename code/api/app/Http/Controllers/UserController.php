@@ -2,24 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use Project\Infrastructure\Exception\Database\UserNotFoundException;
+use Project\Domain\Service\UserService;
+use Project\Infrastructure\Exception\Api\UserNotFoundException;
 use Project\Infrastructure\Interfaces\Database\UserRepositoryInterface;
 
 class UserController extends Controller
 {
-    public function index(UserRepositoryInterface $userRepository)
+    private UserService $userService;
+
+    public function __construct(UserService $userService)
     {
-        return response()->json($userRepository->getUsers()->toArray());
+        $this->userService = $userService;
+    }
+
+    public function index()
+    {
+        return response()->json($this->userService->getUsers()->toArray());
     }
 
     public function getUserId(int $id, UserRepositoryInterface $userRepository)
     {
         try {
-            $user = $userRepository->getUser($id);
+            return response()->json($this->userService->getUser($id)->toArray());
         } catch (UserNotFoundException $e) {
             return response()->json([], 404);
         }
-
-        return response()->json($user->toArray());
     }
 }
