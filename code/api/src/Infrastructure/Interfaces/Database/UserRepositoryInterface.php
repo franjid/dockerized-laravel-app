@@ -7,7 +7,7 @@ use Project\Domain\Entity\User\User as UserEntity;
 
 interface UserRepositoryInterface
 {
-    public function getAll(): UserCollection;
+    public function getUsers(): UserCollection;
 
     public function getUser(int $id): UserEntity;
 }

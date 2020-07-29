@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function index(UserRepositoryInterface $userRepository)
     {
-        return response()->json($userRepository->getAll()->toArray());
+        return response()->json($userRepository->getUsers()->toArray());
     }
 
     public function getUserId(int $id, UserRepositoryInterface $userRepository)

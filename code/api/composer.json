@@ -10,9 +10,10 @@
         "php": "^7.4",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^6.3",
+        "guzzlehttp/guzzle": "^7.0",
         "laravel/framework": "^7.22.2",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "myclabs/php-enum": "^1.7"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

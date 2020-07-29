@@ -17,7 +17,7 @@ class UserEloquentRepository implements UserRepositoryInterface
         $this->userModel = $userModel;
     }
 
-    public function getAll(): UserCollection
+    public function getUsers(): UserCollection
     {
         $results = $this->userModel::all();
 
