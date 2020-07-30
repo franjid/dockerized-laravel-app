@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Post;
-use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Support\ServiceProvider;
 use Project\Infrastructure\Interfaces\Api\JsonPlaceHolderRepositoryInterface;
@@ -33,13 +31,15 @@ class AppServiceProvider extends ServiceProvider
             JsonPlaceHolderApiRepository::class
         );
 
-        $this->app->bind(UserRepositoryInterface::class, static function () {
-            return new UserEloquentRepository(new User());
-        });
+        $this->app->bind(
+            UserRepositoryInterface::class,
+            UserEloquentRepository::class
+        );
 
-        $this->app->bind(PostRepositoryInterface::class, static function () {
-            return new PostEloquentRepository(new Post());
-        });
+        $this->app->bind(
+            PostRepositoryInterface::class,
+            PostEloquentRepository::class
+        );
     }
 
     /**

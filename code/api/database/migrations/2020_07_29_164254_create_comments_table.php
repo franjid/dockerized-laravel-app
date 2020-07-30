@@ -16,7 +16,7 @@ class CreateCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('post_id')->unsigned();
-            $table->string('name', 32);
+            $table->string('name', 128); // JsonPlaceHolder API can return reaaaally long "names"...
             $table->string('email');
             $table->text('body');
             $table->timestamps();

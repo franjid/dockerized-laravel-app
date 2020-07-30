@@ -9,4 +9,8 @@ interface JsonPlaceHolderRepositoryInterface
     public function getUser(int $id): array;
 
     public function getUserPosts(int $userId): array;
+
+    public function getPost(int $postId): array;
+
+    public function getPostComments(int $postId): array;
 }

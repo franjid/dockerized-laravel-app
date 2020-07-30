@@ -30,6 +30,16 @@ class JsonPlaceHolderApiRepository implements JsonPlaceHolderRepositoryInterface
         return $this->request(new ApiRequestTypeEnum(ApiRequestTypeEnum::GET), '/users/' . $userId . '/posts');
     }
 
+    public function getPost(int $postId): array
+    {
+        return $this->request(new ApiRequestTypeEnum(ApiRequestTypeEnum::GET), '/posts/' . $postId);
+    }
+
+    public function getPostComments(int $postId): array
+    {
+        return $this->request(new ApiRequestTypeEnum(ApiRequestTypeEnum::GET), '/posts/' . $postId . '/comments');
+    }
+
     private function request(ApiRequestTypeEnum $type, string $url)
     {
         $response = $this->client->request($type->getValue(), $url);
