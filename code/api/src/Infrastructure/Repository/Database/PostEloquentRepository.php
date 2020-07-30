@@ -2,27 +2,21 @@
 
 namespace Project\Infrastructure\Repository\Database;
 
-use App\Comment;
 use App\Post;
 use Project\Domain\Entity\Collection\CommentCollection;
 use Project\Domain\Entity\Collection\PostCollection;
-use Project\Domain\Entity\Post as PostEntity;
 use Project\Domain\Entity\Comment as CommentEntity;
+use Project\Domain\Entity\Post as PostEntity;
 use Project\Infrastructure\Exception\Database\PostNotFoundException;
 use Project\Infrastructure\Interfaces\Database\PostRepositoryInterface;
 
 class PostEloquentRepository implements PostRepositoryInterface
 {
     private Post $postModel;
-    private Comment $commentModel;
 
-    public function __construct(
-        Post $postModel,
-        Comment $commentModel
-    )
+    public function __construct(Post $postModel)
     {
         $this->postModel = $postModel;
-        $this->commentModel = $commentModel;
     }
 
     public function getUserPosts(int $userId): PostCollection
