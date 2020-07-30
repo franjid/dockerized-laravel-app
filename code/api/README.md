@@ -1,61 +1,44 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# Laravel API App
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+This is a basic Laravel app showing how to work with REST API's. Exposing our own API and also consuming an external one ([JSONPlaceholder](http://jsonplaceholder.typicode.com/) in this case).
 
-## About Laravel
+In every endpoint, we first look if we have any data in the database. If we don't, then we call the external API, fetch the data and store it in the database.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## API endpoints
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+* `/api/users`
+* `/api/users/{id}`
+* `/api/users/{id}/posts`
+* `/api/posts/{id}/comments`
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Architecture
 
-## Learning Laravel
+The project has a DDD approach architecture. That way the code is as agnostic as possible to the framework, it's more reusable and we could switch frameworks easily.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+There is a `src` folder where all the code lies, decoupled from the framework.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+* Application: here we would have anything we wanted to connect with the framework (in this project we don't have anything)
+* Domain: folder where we store all our domain entities, logic (in the form of services), etc.
+* Infrastructure: this is the place to store all the code that will interact to external resources (a database, API's, queue system, etc)
 
-## Laravel Sponsors
+## Database design
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+This project database schema is really simple. We just added some indexes here and there for future features.
 
-### Premium Partners
+### Tables
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+#### `users`
+    * Added a unique index to the email so we could quickly search a user by it
 
-## Contributing
+#### `posts`
+    * Added a fulltext index to the title as we could have an option to search posts if a title contains a specific string (this is fine in a first iteration, but should be improved later. More on [Things that could be improved](Things that could be improved))
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+#### `comments`
 
-## Code of Conduct
+## Things that could be improved
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+* Cache in Redis. Even if in the current state we store data in the database, saving it in Redis (or any similar cache system) would be faster
+* Add pagination to the API
+* Use Elasticsearch, Algolia or similar for searching posts by title instead of using the database
+* I didn't add any tests as the project in its actual state has almost no logic, but in a real worl project we should add tests
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
