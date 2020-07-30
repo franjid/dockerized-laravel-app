@@ -2,12 +2,15 @@
 
 namespace App\Providers;
 
+use App\Post;
 use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Support\ServiceProvider;
 use Project\Infrastructure\Interfaces\Api\JsonPlaceHolderRepositoryInterface;
+use Project\Infrastructure\Interfaces\Database\PostRepositoryInterface;
 use Project\Infrastructure\Interfaces\Database\UserRepositoryInterface;
 use Project\Infrastructure\Repository\Api\JsonPlaceHolderApiRepository;
+use Project\Infrastructure\Repository\Database\PostEloquentRepository;
 use Project\Infrastructure\Repository\Database\UserEloquentRepository;
 
 class AppServiceProvider extends ServiceProvider
@@ -32,6 +35,10 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(UserRepositoryInterface::class, static function () {
             return new UserEloquentRepository(new User());
+        });
+
+        $this->app->bind(PostRepositoryInterface::class, static function () {
+            return new PostEloquentRepository(new Post());
         });
     }
 

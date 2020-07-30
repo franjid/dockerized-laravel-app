@@ -4,35 +4,35 @@ namespace Project\Domain\Entity;
 
 use DateTimeImmutable;
 
-class User
+class Post
 {
     public const FIELD_ID = 'id';
-    public const FIELD_NAME = 'name';
-    public const FIELD_USERNAME = 'username';
-    public const FIELD_EMAIL = 'email';
+    public const FIELD_USER_ID = 'userId';
+    public const FIELD_TITLE = 'title';
+    public const FIELD_BODY = 'body';
     public const FIELD_CREATED_AT = 'createdAt';
     public const FIELD_UPDATED_AT = 'updatedAt';
 
     private int $id;
-    private string $name;
-    private string $username;
-    private string $email;
+    private int $userId;
+    private string $title;
+    private string $body;
     private DateTimeImmutable $createdAt;
     private DateTimeImmutable $updatedAt;
 
     public function __construct(
         int $id,
-        string $name,
-        string $username,
-        string $email,
+        int $userId,
+        string $title,
+        string $body,
         DateTimeImmutable $createdAt,
         DateTimeImmutable $updatedAt
     )
     {
         $this->id = $id;
-        $this->name = $name;
-        $this->username = $username;
-        $this->email = $email;
+        $this->userId = $userId;
+        $this->title = $title;
+        $this->body = $body;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
     }
@@ -42,19 +42,19 @@ class User
         return $this->id;
     }
 
-    public function getName(): string
+    public function getUserId(): int
     {
-        return $this->name;
+        return $this->userId;
     }
 
-    public function getUsername(): string
+    public function getTitle(): string
     {
-        return $this->username;
+        return $this->title;
     }
 
-    public function getEmail(): string
+    public function getBody(): string
     {
-        return $this->email;
+        return $this->body;
     }
 
     public function getCreatedAt(): DateTimeImmutable
@@ -71,9 +71,9 @@ class User
     {
         return new self(
             $data[self::FIELD_ID],
-            $data[self::FIELD_NAME],
-            $data[self::FIELD_USERNAME],
-            $data[self::FIELD_EMAIL],
+            $data[self::FIELD_USER_ID],
+            $data[self::FIELD_TITLE],
+            $data[self::FIELD_BODY],
             (new DateTimeImmutable())->setTimestamp($data[self::FIELD_CREATED_AT]),
             (new DateTimeImmutable())->setTimestamp($data[self::FIELD_UPDATED_AT]),
         );
@@ -83,9 +83,9 @@ class User
     {
         return [
             self::FIELD_ID => $this->getId(),
-            self::FIELD_NAME => $this->getName(),
-            self::FIELD_USERNAME => $this->getUsername(),
-            self::FIELD_EMAIL => $this->getEmail(),
+            self::FIELD_USER_ID => $this->getUserId(),
+            self::FIELD_TITLE => $this->getTitle(),
+            self::FIELD_BODY => $this->getBody(),
             self::FIELD_CREATED_AT => $this->getCreatedAt()->getTimestamp(),
             self::FIELD_UPDATED_AT => $this->getUpdatedAt()->getTimestamp(),
         ];

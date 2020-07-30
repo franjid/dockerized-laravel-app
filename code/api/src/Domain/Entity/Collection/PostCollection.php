@@ -2,21 +2,21 @@
 
 namespace Project\Domain\Entity\Collection;
 
-use Project\Domain\Entity\User;
+use Project\Domain\Entity\Post;
 
-class UserCollection
+class PostCollection
 {
-    /** @var User[] $users */
-    private array $users;
+    /** @var Post[] $posts */
+    private array $posts;
 
-    public function __construct(?User ...$users)
+    public function __construct(?Post ...$posts)
     {
-        $this->users = $users;
+        $this->posts = $posts;
     }
 
     public function getItems(): array
     {
-        return $this->users;
+        return $this->posts;
     }
 
     public function count(): int
@@ -28,8 +28,8 @@ class UserCollection
     {
         $result = [];
 
-        foreach ($this->users as $user) {
-            $result[] = $user->toArray();
+        foreach ($this->posts as $post) {
+            $result[] = $post->toArray();
         }
 
         return $result;

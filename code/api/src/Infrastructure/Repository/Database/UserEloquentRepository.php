@@ -4,7 +4,7 @@ namespace Project\Infrastructure\Repository\Database;
 
 use App\User;
 use Project\Domain\Entity\Collection\UserCollection;
-use Project\Domain\Entity\User\User as UserEntity;
+use Project\Domain\Entity\User as UserEntity;
 use Project\Infrastructure\Exception\Database\UserNotFoundException;
 use Project\Infrastructure\Interfaces\Database\UserRepositoryInterface;
 

@@ -8,7 +8,7 @@ use Project\Domain\Entity\Collection\UserCollection;
 use Project\Infrastructure\Exception\Database\UserNotFoundException;
 use Project\Infrastructure\Interfaces\Api\JsonPlaceHolderRepositoryInterface;
 use Project\Infrastructure\Interfaces\Database\UserRepositoryInterface;
-use Project\Domain\Entity\User\User as UserEntity;
+use Project\Domain\Entity\User as UserEntity;
 
 class UserService
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Project\Domain\Entity\User\Type;
+namespace Project\Domain\Entity\Type;
 
 use MyCLabs\Enum\Enum;
 

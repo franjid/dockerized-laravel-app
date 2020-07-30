@@ -3,7 +3,7 @@
 namespace Project\Infrastructure\Repository\Api;
 
 use GuzzleHttp\Client;
-use Project\Domain\Entity\User\Type\ApiRequestTypeEnum;
+use Project\Domain\Entity\Type\ApiRequestTypeEnum;
 use Project\Infrastructure\Interfaces\Api\JsonPlaceHolderRepositoryInterface;
 
 class JsonPlaceHolderApiRepository implements JsonPlaceHolderRepositoryInterface
@@ -23,6 +23,11 @@ class JsonPlaceHolderApiRepository implements JsonPlaceHolderRepositoryInterface
     public function getUser(int $id): array
     {
         return $this->request(new ApiRequestTypeEnum(ApiRequestTypeEnum::GET), '/users/' . $id);
+    }
+
+    public function getUserPosts(int $userId): array
+    {
+        return $this->request(new ApiRequestTypeEnum(ApiRequestTypeEnum::GET), '/users/' . $userId . '/posts');
     }
 
     private function request(ApiRequestTypeEnum $type, string $url)
