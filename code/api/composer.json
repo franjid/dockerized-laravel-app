@@ -3,7 +3,9 @@
     "type": "project",
     "description": "Laravel App",
     "keywords": [
-        "laravel"
+        "laravel",
+        "api",
+        "JsonPlaceHolder"
     ],
     "license": "MIT",
     "require": {
