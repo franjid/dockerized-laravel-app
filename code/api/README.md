@@ -40,5 +40,5 @@ This project database schema is really simple. We just added some indexes here a
 * Cache in Redis. Even if in the current state we store data in the database, saving it in Redis (or any similar cache system) would be faster
 * Add pagination to the API
 * Use Elasticsearch, Algolia or similar for searching posts by title instead of using the database
-* I didn't add any tests as the project in its actual state has almost no logic, but in a real worl project we should add tests
+* I didn't add any tests as the project in its actual state has almost no logic, but in a real world project we should add tests
 
